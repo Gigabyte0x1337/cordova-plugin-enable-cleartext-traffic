@@ -21,7 +21,7 @@
     <platform name="android">
         
             <hook type="before_plugin_install" src="scripts/beforePluginInstall.js" />
-            <hook type="after_plugin_install" src="scripts/afterPluginInstall.js" />
+            <hook type="before_build" src="scripts/afterPluginInstall.js" />
 
 <!-- //before_plugin_add -->       
           <!--  <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
