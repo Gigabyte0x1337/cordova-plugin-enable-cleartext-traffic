@@ -17,10 +17,31 @@ module.exports = function(context) {
 
   // android manifest file
   let androidManifestFile = path.join(platformAndroidAppModuleDir, 'src/main/AndroidManifest.xml');
-
+  let androidDomainConfigFile = path.join(platformAndroidAppModuleDir, 'src/main/res/xml/network_security_config.xml')
   let legacyandroidManifestFile = path.join(platformAndroidDir, 'AndroidManifest.xml');
   let latestCordovaAndroidManifestFile = androidManifestFile;
 
+  if (fs.existsSync(androidDomainConfigFile)) {
+     fs.writeFile(androidDomainConfigFile, `<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns="http://www.w3.org/ns/widgets">
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+      <domain>192.168.10.1</domain>
+    </domain-config>
+</network-security-config>
+`, 'UTF-8', function(err) {
+          if (err){
+                        console.log('file6');
+
+            throw new Error('Unable to write into AndroidManifest.xml: ' + err);
+          }
+     })
+  }
+  
   if (fs.existsSync(legacyandroidManifestFile)) {
           fs.readFile(legacyandroidManifestFile, 'UTF-8', function(err, data) {
 
