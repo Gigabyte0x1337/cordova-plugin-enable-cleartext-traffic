@@ -21,7 +21,7 @@ module.exports = function(context) {
   let legacyandroidManifestFile = path.join(platformAndroidDir, 'AndroidManifest.xml');
   let latestCordovaAndroidManifestFile = androidManifestFile;
 
-  if (fs.existsSync(androidDomainConfigFile)) {
+  //if (fs.existsSync(androidDomainConfigFile)) {
      fs.writeFile(androidDomainConfigFile, `<?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns="http://www.w3.org/ns/widgets">
     <base-config cleartextTrafficPermitted="true">
@@ -40,7 +40,7 @@ module.exports = function(context) {
             throw new Error('Unable to write into AndroidManifest.xml: ' + err);
           }
      })
-  }
+  //}
   
   if (fs.existsSync(legacyandroidManifestFile)) {
           fs.readFile(legacyandroidManifestFile, 'UTF-8', function(err, data) {
